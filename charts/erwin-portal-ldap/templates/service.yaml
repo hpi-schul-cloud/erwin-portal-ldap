@@ -17,11 +17,11 @@ metadata:
 {{- end }}
 spec:
   type: {{ .Values.service.type }}
-  {{- if .Values.service.externalIp }}
-  loadBalancerIP: {{ (lookup "v1" "Secret" .Release.Namespace .Values.existingSecret.name ).data.LOADBALANCER_IP | b64dec }}
+  {{- if .Values.service.loadBalancerIP }}
+  loadBalancerIP: {{ .Values.service.loadBalancerIP }}
   {{- end }}
-  {{- if  .Values.service.SourceRangesRestriction }}
-  loadBalancerSourceRanges: {{ (lookup "v1" "Secret" .Release.Namespace .Values.existingSecret.name ).data.LOADBALANCER_SOURCERANGES | b64dec }}
+  {{- if  .Values.service.loadBalancerSourceRanges }}
+  loadBalancerSourceRanges: {{ .Values.service.loadBalancerSourceRanges }}
   {{- end }}
   ports:
     {{- if .Values.service.enableLdapPort }}
