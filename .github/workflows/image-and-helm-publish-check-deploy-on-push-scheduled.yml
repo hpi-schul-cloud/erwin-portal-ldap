@@ -85,7 +85,8 @@ jobs:
       - create_branch_identifier
       - select_helm_version_generation_and_image_tag_generation
     uses: dBildungsplattform/dbp-github-workflows/.github/workflows/chart-release.yaml@8
-    secrets: inherit
+    secrets:
+      HELM_CHARTS_REGISTRY_PUBLISHER: ${{ secrets.HELM_CHARTS_REGISTRY_PUBLISHER }}
     with:
       chart_name: erwin-portal-ldap
       helm_chart_version_generation: ${{ needs. select_helm_version_generation_and_image_tag_generation.outputs.SELECT_HELM_VERSION_GENERATION }}
